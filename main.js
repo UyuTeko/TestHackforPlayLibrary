@@ -1,4 +1,4 @@
-import * as ml from "./mainLogic";
+import { main } from "./mainLogic.js";
 
 window.game = {
     _listeners: {
@@ -6,12 +6,10 @@ window.game = {
     }
 }
 
-ml.main();
+main();
 
 function gameLoop() {
-    game._listeners.exitframe.forEach((func) => {
-        func();
-    });
+    game._listeners.exitframe.forEach(func => func());
     requestAnimationFrame(gameLoop);
 }
 gameLoop();
