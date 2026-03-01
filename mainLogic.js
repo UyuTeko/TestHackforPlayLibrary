@@ -1,4 +1,4 @@
-export const main = function() {
+export function main() {
     const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext('2d');
     game._listeners.exitframe.push(() => {
