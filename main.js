@@ -1,4 +1,4 @@
-import { main } from "./mainLogic.js";
+import "./mainLogic.js";
 
 window.game = {
     _listeners: {
@@ -6,7 +6,7 @@ window.game = {
     }
 }
 
-main(window.game);
+ts.main(window.game);
 
 function gameLoop() {
     game._listeners.exitframe.forEach(func => func());
