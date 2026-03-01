@@ -1,8 +1,9 @@
-export function main() {
+// export は使わず、グローバルな場所に置く
+window.myCustomMain = function() {
     const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext('2d');
     game._listeners.exitframe.push(() => {
         ctx.fillStyle = 'gray';
         ctx.fillRect(0, 0, 480, 320);
     });
-}
+};
