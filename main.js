@@ -6,7 +6,7 @@ window.game = {
     }
 }
 
-main();
+main(window.game);
 
 function gameLoop() {
     game._listeners.exitframe.forEach(func => func());
