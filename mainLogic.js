@@ -24,23 +24,28 @@ window.ts = {
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             this.angle += .02;
             const projectedPoints = this.vertices.map(v => {
-                let x = v.x;
-                let y = v.z;
+                let x = v.x * Math.cos(this.angle) - v.z * Math.sin(this.angle);
+                let z = v.x * Math.sin(this.angle) + v.z * Math.cos(this.angle);
+                let y = v.y;
+
+                const zOffset = 4;
+                const fov = 400;
+                const factor = fov / (z + zOffset);
                 return {
-                    x: x * 50 + 240,
-                    y: y * 50 + 160
+                    x: x * factor + canvas.width / 2,
+                    y: y * factor + canvas.height / 2
                 };
             });
-            ctx.strokeStyle = 'white';
-            ctx.lineWidth = 10;
-            ctx.lineCap = 'round';
-            projectedPoints.forEach((v) => {
+            ctx.strokeStyle = 'lime';
+            ctx.lineWidth = 4;
+            this.edges.forEach(edge => {
+                const p1 = projectedPoints[edge[0]];
+                const p2 = projectedPoints[edge[1]];
                 ctx.beginPath();
-                ctx.moveTo(v.x, v.y);
-                ctx.lineTo(v.x, v.y);
+                ctx.moveTo(p1.x, p1.y);
+                ctx.lineTo(p2.x, p2.y);
                 ctx.stroke();
             });
-            ctx.restore();
             gameCtx.drawImage(canvas, 0, 0);
         });
     }
